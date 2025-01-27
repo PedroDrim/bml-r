@@ -1,3 +1,15 @@
+# Buil alpine
+FROM alpine:3.14 AS build
+
+# Create build directory
+WORKDIR /build
+
+# Copy files to directory
+COPY ./data /build/
+
+# Descompando arquivos de simulacao
+RUN unzip simulationInput_D.zip -d .
+
 FROM r-base
 
 # Create app directory
@@ -5,6 +17,9 @@ WORKDIR /app
 
 # Copy files to directory
 COPY ./ /app/
+
+# Copiando tudo para deploy
+COPY --from=build ./build /app/data
 
 # Instalando pacotes
 RUN install2.r testthat data.table

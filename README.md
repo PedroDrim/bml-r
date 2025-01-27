@@ -27,21 +27,29 @@ git clone -b <branch> https://github.com/PedroDrim/bml-r
 
 ```
 # Gerando build docker
-sudo docker build -t simpleclass_r .
+sudo docker build -t inputclass_r .
 
 # Executando container
-sudo docker run simpleclass_r
+sudo docker run inputclass_r
 ```
 
 4. O resultado sairá no STDOUT no seguinte formato:
 
 ```
 saving to file "./src//functions.Rc" ... done
+saving to file "./src//model/Table.Rc" ... done
 saving to file "./src//model/UserInfo.Rc" ... done
-[START] R_1e+05
-[OK]Tamanho: 1e+05
-[OK]Tempo: 491 ms
-[END] R_1e+05
+saving to file "./src//provider/MaxValueAnalysis.Rc" ... done
+saving to file "./src//provider/MeanAnalysis.Rc" ... done
+saving to file "./src//provider/MinValueAnalysis.Rc" ... done
+[START] R_data/data_D10.csv
+[OK]Arquivo: data/data_D10.csv
+[OK]TempoLeitura: 7646 ms
+[OK]TempoAnalise: 6 ms
+[OK]Max: 1e+06
+[OK]Min: 1
+[OK]Mean: 500000.5
+[END] R_data/data_D10.csv
 ```
 
 ### Garantia de Qualidade

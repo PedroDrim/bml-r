@@ -1,12 +1,11 @@
 #!/bin/bash
-Rscript start.R 100000
-Rscript start.R 200000
-Rscript start.R 300000
-Rscript start.R 400000
-Rscript start.R 500000
-Rscript start.R 600000
-Rscript start.R 700000
-Rscript start.R 800000
-Rscript start.R 900000
-Rscript start.R 1000000
-sleep 1d
+Rscript start.R data/data_D1.csv
+Rscript start.R data/data_D2.csv
+Rscript start.R data/data_D3.csv
+Rscript start.R data/data_D4.csv
+Rscript start.R data/data_D5.csv
+Rscript start.R data/data_D6.csv
+Rscript start.R data/data_D7.csv
+Rscript start.R data/data_D8.csv
+Rscript start.R data/data_D9.csv
+Rscript start.R data/data_D10.csv
