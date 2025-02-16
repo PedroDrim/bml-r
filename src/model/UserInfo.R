@@ -1,13 +1,13 @@
 # Informacoes do usuario
 userInfo.create = function(userArray, passwordArray) {
-  response = data.table(user = userArray, password = cryptPassword(passwordArray))
+  response = data.table(user = userArray, password = private.cryptPassword(passwordArray))
   return(response)
 }
 
 # Metodo privado para encriptar a senha do usuario
 # @param password Senha a ser encriptada
 # @return Nova senha encriptada
-cryptPassword = function(passwordArray) {
+private.cryptPassword = function(passwordArray) {
   cryptList = strsplit(passwordArray, NULL) |> sapply(function(crypt) {
     size = length(crypt)
     response = paste(crypt[size:1], collapse = "")
