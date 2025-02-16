@@ -2,6 +2,7 @@
 load.packages = function() {
   require(compiler, quietly = TRUE)
   require(data.table, quietly = TRUE)
+  require(testthat, quietly = TRUE)
 }
 
 # Compilando funcoes
