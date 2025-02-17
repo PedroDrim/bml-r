@@ -1,3 +1,4 @@
+#===================================================
 # Método para captura e tratamento dos parametros obtidos via console
 # @param codes Lista de parametros obtidos via console
 # @return Tamanho de usuários á serem gerados
@@ -12,37 +13,64 @@ convertArgs = function(args) {
   return(line)
 }
 
-# Método de inicialização do projeto
-# @param args Lista de parametros obtidos via console
-start = function(args) {
-
-  fileName = convertArgs(args)
-  
-  leitura = system.time({
-    # Convertendo arquivo em lista de "UserInfo"
-    userInfoList = table.deserializeFile(fileName)
+#===================================================
+benchmark = function(table, code, format = 1000) {
+  # Obtendo o tempo inicial em segundos
+  tempo = system.time({
+    result = code(table)
   })[3]
 
-  leitura = round(leitura * 1000, digits = 2)
-  names(leitura) = NULL
-
-  analise = system.time({
-    # Realizando analises
-    maxValue = maxValueAnalysis.analysis(userInfoList)
-    minValue = minValueAnalysis.analysis(userInfoList)
-    mean = meanAnalysis.analysis(userInfoList)
-  })[3]
-
-  analise = round(analise * 1000, digits = 2)
-  names(analise) = NULL
+  tempo = round(tempo * format, digits = 2)
+  names(tempo) = NULL 
   
-  # Dados de saida
-  cat(sprintf("[START] R_%s\n", fileName))
-  cat(sprintf("[OK]Arquivo: %s\n", fileName))
-  cat(sprintf("[OK]TempoLeitura: %s ms\n", leitura))
-  cat(sprintf("[OK]TempoAnalise: %s ms\n", analise))
-  cat(sprintf("[OK]Max: %s\n", maxValue))
-  cat(sprintf("[OK]Min: %s\n", minValue))
-  cat(sprintf("[OK]Mean: %s\n", mean))
-  cat(sprintf("[END] R_%s\n", fileName))
+  r = list(time = tempo, value = result)
+  return(r)
 }
+#===================================================
+
+#===================================================
+# Definindo função para realizar o experimento
+start = function(args) {
+  configName = convertArgs(args)
+  configJson = fromJSON(configName, simplifyVector = FALSE)
+
+  INPUT = configJson$INPUT_FILENAME
+  INPUT = do.call(c, INPUT)
+  
+  OUTPUT = configJson$OUTPUT_FILENAME
+
+  timeMap = list()
+  for(index in 1:length(INPUT)) {
+    cat(sprintf("[START] Arquivo: %s\n", index))
+
+    fileName = INPUT[index]
+
+    cat("\t[LOG] Read\n")
+    dataReader = benchmark(fileName, fread)
+    dataInput = dataReader$value
+    
+    cat("\t[LOG] Summary\n")
+    summaryResult = dataInput |> benchmark(summaryAnalysis)
+
+    cat("\t[LOG] Merge\n")
+    mergeSortResult = dataInput |> benchmark(mergeSortAnalysis)
+
+    cat("\t[LOG] Language\n")
+    languageSortResult = dataInput |> benchmark(languageSortAnalysis)
+
+    cat("\t[LOG] Quick\n")
+    quickSortResult = dataInput |> benchmark(quickSortAnalysis)
+    
+    timeMap[[sprintf("Read@%s", index)]] = dataReader$time
+    timeMap[[sprintf("SummaryAnalysis@%s", index)]] = summaryResult$time
+    timeMap[[sprintf("MergeAnalysis@%s", index)]] = mergeSortResult$time
+    timeMap[[sprintf("LanguageAnalysis@%s", index)]] = languageSortResult$time
+    timeMap[[sprintf("QuickAnalysis@%s", index)]] = quickSortResult$time
+
+    cat(sprintf("[END] Arquivo: %s\n", index))
+  }
+  
+  response = toJSON(timeMap, auto_unbox = TRUE)
+  cat(response, file = OUTPUT)
+}
+#===================================================

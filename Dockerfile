@@ -8,7 +8,7 @@ WORKDIR /build
 COPY ./data /build/
 
 # Descompando arquivos de simulacao
-RUN unzip simulationInput_D.zip -d .
+RUN unzip simulationInput_M.zip -d .
 
 FROM r-base
 
@@ -22,7 +22,7 @@ COPY ./ /app/
 COPY --from=build ./build /app/data
 
 # Instalando pacotes
-RUN install2.r testthat data.table
+RUN install2.r testthat data.table jsonlite
 
 # Compilando R e executando testes
 RUN Rscript build.R
