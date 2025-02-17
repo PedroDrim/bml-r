@@ -10,7 +10,7 @@ COPY ./ /app/
 RUN install2.r testthat data.table
 
 # Compilando R e executando testes
-RUN Rscript build.R
+RUN Rscript build.R && Rscript test.R
 
 # Iniciando CLI
 ENTRYPOINT ["sh","Bench.sh"]
