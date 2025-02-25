@@ -25,7 +25,7 @@ COPY --from=build ./build /app/data
 RUN install2.r testthat data.table jsonlite
 
 # Compilando R e executando testes
-RUN Rscript build.R
+RUN Rscript build.R && Rscript test.R
 
 # Iniciando CLI
 ENTRYPOINT ["sh","Bench.sh"]

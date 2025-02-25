@@ -1,15 +1,19 @@
 #==============================================
-tableValidation = function(table) {
-  if(!is.data.frame(table) || nrow(table) == 0) {
-    stop("'table' vazia ou com tipo invalido tabela")
-  }
+private.tableValidation = function(table) {
+  response = NA
+  if(!is.data.frame(table) || nrow(table) == 0)
+    response = invalidParameterException("'table' vazia ou com tipo invalido tabela")
+  
+  return(response)
 }
 #==============================================
 
 #==============================================
 summaryAnalysis = function(table) {
-  tableValidation(table)
-  
+  validation = private.tableValidation(table)
+  if(class(validation) == "invalidParameterException")
+    return(validation)
+
   result = summary(table$credit)[c(1,4,6)]
   return(result)
 }
@@ -17,7 +21,9 @@ summaryAnalysis = function(table) {
 
 #==============================================
 mergeSortAnalysis = function(table) {
-  tableValidation(table)
+  validation = private.tableValidation(table)
+  if(class(validation) == "invalidParameterException")
+    return(validation)
   
   private.mergeSort = function(dt.subset) {
     # Limite da recursividade
@@ -81,7 +87,9 @@ mergeSortAnalysis = function(table) {
 
 #==============================================
 languageSortAnalysis = function(table) {
-  tableValidation(table)
+  validation = private.tableValidation(table)
+  if(class(validation) == "invalidParameterException")
+    return(validation)
   
   result = table[order(-credit),]
   return(result)
@@ -90,7 +98,9 @@ languageSortAnalysis = function(table) {
 
 #==============================================
 quickSortAnalysis = function(table) {
-  tableValidation(table)
+  validation = private.tableValidation(table)
+  if(class(validation) == "invalidParameterException")
+    return(validation)
     
   private.quickSort = function(dt.subset) {
     tamanho = dim(dt.subset)[1]

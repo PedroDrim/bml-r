@@ -14,27 +14,12 @@ convertArgs = function(args) {
 }
 
 #===================================================
-benchmark = function(table, code, format = 1000) {
-  # Obtendo o tempo inicial em segundos
-  tempo = system.time({
-    result = code(table)
-  })[3]
-
-  tempo = round(tempo * format, digits = 2)
-  names(tempo) = NULL 
-  
-  r = list(time = tempo, value = result)
-  return(r)
-}
-#===================================================
-
-#===================================================
 # Definindo função para realizar o experimento
 start = function(args) {
   configName = convertArgs(args)
   configJson = fromJSON(configName, simplifyVector = FALSE)
 
-  INPUT = configJson$INPUT_FILENAME
+  INPUT = configJson$INPUT_FILENAME_LIST
   INPUT = do.call(c, INPUT)
   
   OUTPUT = configJson$OUTPUT_FILENAME
