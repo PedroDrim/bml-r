@@ -1,0 +1,46 @@
+name: Run Docker with Tests (R)
+
+on:
+  push:
+    branches: ["*"]
+  pull_request:
+    branches: ["*"]
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: Run Tests with R
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🚗 Checkout do código
+        uses: actions/checkout@v4
+
+      - name: 📦 Instalar R e dependências
+        run: |
+          sudo apt update
+          sudo apt install -y r-base r-cran-testthat r-cran-covr
+
+      - name: 📊 Executar testes e Gerar relatório de cobertura
+        run: Rscript test.R
+
+      - name: 📤 Upload da cobertura de testes
+        uses: actions/upload-artifact@v4
+        with:
+          name: cobertura-de-testes
+          path: coverage/
+
+  docker:
+    name: 🐳 Build & Run Docker
+    runs-on: ubuntu-latest
+    needs: test  # Só executa se os testes passarem
+
+    steps:
+      - name: 🚀 Checkout do código
+        uses: actions/checkout@v4
+
+      - name: 🏗️ Build da imagem Docker
+        run: docker build -t my-app .
+
+      - name: 🏃 Rodar o container
+        run: docker run --rm my-app
