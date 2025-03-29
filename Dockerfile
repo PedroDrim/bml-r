@@ -6,9 +6,6 @@ WORKDIR /app
 # Copy files to directory
 COPY ./ /app/
 
-# Copiando tudo para deploy
-COPY --from=build ./build /app/data
-
 # Instalando dependencias
 RUN apt update && apt install -y libssl-dev libcurl4-openssl-dev
 
