@@ -22,7 +22,7 @@ COPY ./ /app/
 COPY --from=build ./build /app/data
 
 # Instalando pacotes
-RUN install2.r testthat data.table jsonlite
+RUN install2.r testthat covr data.table jsonlite
 
 # Compilando R e executando testes
 RUN Rscript build.R && Rscript test.R
