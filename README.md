@@ -1,5 +1,8 @@
 # bml-r
 
+[![Run Docker with Tests (R)](https://github.com/PedroDrim/bml-r/actions/workflows/R.yml/badge.svg?branch=simpleclass)](https://github.com/PedroDrim/bml-r/actions/workflows/R.yml)
+[![Codacy Security Scan](https://github.com/PedroDrim/bml-r/actions/workflows/codacy.yml/badge.svg?branch=simpleclass)](https://github.com/PedroDrim/bml-r/actions/workflows/codacy.yml)
+
 ### Introdução
 
 O objetivo deste repositório é estudar o comportamento, estrutura e o desempenho da linguagem typescript.
