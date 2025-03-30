@@ -7,3 +7,4 @@ docker-compose.yml
 
 .Rhistory
 .Rapp.history
+coverage
