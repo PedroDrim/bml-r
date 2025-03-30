@@ -9,4 +9,3 @@ Rscript start.R 700000
 Rscript start.R 800000
 Rscript start.R 900000
 Rscript start.R 1000000
-sleep 1d
