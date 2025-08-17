@@ -1,6 +1,6 @@
 # Método para captura e tratamento dos parametros obtidos via console
-# @param codes Lista de parametros obtidos via console
-# @return Tamanho de usuários á serem gerados
+# @param (character[]) args Lista de parametros obtidos via console
+# @return (numeric) Tamanho de usuários á serem gerados
 convertArgs = function(args) {
   
   if(length(args) != 1) {
@@ -13,7 +13,7 @@ convertArgs = function(args) {
 }
 
 # Método de inicialização do projeto
-# @param args Lista de parametros obtidos via console
+# @param (character[]) args Lista de parametros obtidos via console
 start = function(args) {
 
   fileName = convertArgs(args)
