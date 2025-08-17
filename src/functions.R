@@ -1,3 +1,5 @@
+# Método de inicialização do projeto
+# @param (character[]) args Lista de parametros obtidos via console
 start = function(args) {
   
   size = convertArgs(args)
@@ -17,6 +19,9 @@ start = function(args) {
   cat(sprintf("[END] R_%s\n", size))
 }
 
+# Método para captura e tratamento dos parametros obtidos via console
+# @param (character[]) args Lista de parametros obtidos via console
+# @return (numeric) Tamanho de usuários á serem gerados
 convertArgs = function(args) {
 
   if(length(args) != 1) {
