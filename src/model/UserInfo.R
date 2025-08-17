@@ -1,6 +1,6 @@
 # Metodo para criar Informacoes do usuario
-# @param (character[]) userArray
-# @param (character[]) passwordArray
+# @param (character[]) userArray Vetor de nome dos usuarios
+# @param (character[]) passwordArray Vetor de senha dos usuarios
 # @returns (data.table) Tabela contendo usuarios e senhas
 userInfo.create = function(userArray, passwordArray) {
   response = data.table(user = userArray, password = private.cryptPassword(passwordArray))
