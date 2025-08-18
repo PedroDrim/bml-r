@@ -1,4 +1,6 @@
-# Classe para gerenciar uma tabela de usuarios
+# Metodo responsavel por desserializar um arquivo de usuarios
+# @param (character) fileName Nome do arquivo
+# @returns (data.table) Tabela desserializada
 tableReader.deserializeFile = function(fileName) {
   tryCatch({
     response = fread(fileName)

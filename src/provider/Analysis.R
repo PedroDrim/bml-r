@@ -1,4 +1,7 @@
 #==============================================
+# Metodo privado responsavel por validar uma tabela
+# @param (data.table) table Tabela a ser validada
+# @returns (data.table) A tabela caso seja valida
 private.tableValidation = function(table) {
   response = NA
   if(!is.data.frame(table) || nrow(table) == 0)
@@ -9,6 +12,9 @@ private.tableValidation = function(table) {
 #==============================================
 
 #==============================================
+# Metodo responsavel por analisar os valores maximo, minimo e medio dos dados
+# @param (data.table) table Tabela a ser analisada
+# @returns (numeric[]) Vetor contendo os valores maximo, minimo e medio
 summaryAnalysis = function(table) {
   validation = private.tableValidation(table)
   if(class(validation) == "invalidParameterException")
@@ -20,6 +26,9 @@ summaryAnalysis = function(table) {
 #==============================================
 
 #==============================================
+# Metodo responsavel por ordenar os dados por mergeSort
+# @param (data.table) table Tabela a ser analisada
+# @returns (numeric[]) Tabela ordenada
 mergeSortAnalysis = function(table) {
   validation = private.tableValidation(table)
   if(class(validation) == "invalidParameterException")
@@ -86,6 +95,9 @@ mergeSortAnalysis = function(table) {
 #==============================================
 
 #==============================================
+# Metodo responsavel por ordenar os dados por meio da propria linguagem
+# @param (data.table) table Tabela a ser analisada
+# @returns (numeric[]) Tabela ordenada
 languageSortAnalysis = function(table) {
   validation = private.tableValidation(table)
   if(class(validation) == "invalidParameterException")
@@ -97,6 +109,9 @@ languageSortAnalysis = function(table) {
 #==============================================
 
 #==============================================
+# Metodo responsavel por ordenar os dados por quickSort
+# @param (data.table) table Tabela a ser analisada
+# @returns (numeric[]) Tabela ordenada
 quickSortAnalysis = function(table) {
   validation = private.tableValidation(table)
   if(class(validation) == "invalidParameterException")
@@ -121,8 +136,7 @@ quickSortAnalysis = function(table) {
     arrayMaiores = private.quickSort(maiores)
 
     # Retornando vetor
-    l = list(arrayMaiores, iguais, arrayMenores)
-    response = rbindlist(l)
+    response = list(arrayMaiores, iguais, arrayMenores) |> rbindlist()
     return(response)
   }
   

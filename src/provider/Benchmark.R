@@ -1,4 +1,9 @@
 #===================================================
+# Metodo responsavel por calcular o benchmark de um codigo
+# @param (data.table) tabela Tabela a ser parametro do codigo
+# @param (function) code Funcao a ser executada
+# @param (numeric) format Formato da escala de tempo
+# @returns (lista) Lista de benchmark do codigo executado
 benchmark = function(table, code, format = 1000) {
   if(!is.function(code))
     return(benchmarkException("Parametro 'code' invalido"))
