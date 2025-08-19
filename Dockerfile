@@ -1,4 +1,4 @@
-FROM r-base
+FROM r-base:4.4.3
 
 # Create app directory
 WORKDIR /app
