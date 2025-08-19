@@ -43,7 +43,7 @@ jobs:
         run: docker compose up --build -d
 
       - name: 🏃 Rodar o container
-        run: docker compose run --rm benchmark | tee benchmark_output.log
+        run: docker compose run --rm benchmark
 
       - name: 📤 Publicar resultado como artefato
         uses: actions/upload-artifact@v4
