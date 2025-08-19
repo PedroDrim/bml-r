@@ -5,3 +5,4 @@ read.functions()
 
 args = commandArgs(trailingOnly = TRUE)
 start(args)
+print("end")
