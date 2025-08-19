@@ -10,7 +10,7 @@ COPY ./data /build/
 # Descompando arquivos de simulacao
 RUN unzip simulationInput_D.zip -d .
 
-FROM r-base
+FROM r-base:4.4.3
 
 # Create app directory
 WORKDIR /app
