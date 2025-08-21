@@ -1,7 +1,6 @@
 {
     "INPUT_FILENAME_LIST_1": [
-        "data/data_M1.csv", "data/data_M2.csv", "data/data_M3.csv", "data/data_M4.csv", "data/data_M5.csv",
-        "data/data_M6.csv", "data/data_M7.csv", "data/data_M8.csv", "data/data_M9.csv", "data/data_M10.csv"
+        "data/data_M1.csv"
     ],
     "OUTPUT_FILENAME": "benchmark.json"
 }
